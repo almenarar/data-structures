@@ -117,3 +117,19 @@ class SkiplistList(BaseList):
             k += 1
             z = z // 2
         return k
+
+    def truncate(self,i):
+        new_list = self.SkiplistList()
+        while i < self.n:
+            node = self.find_pred(i).next[0]
+            w = new_list._new_node(node.x, node.height())
+            if w.height() > new_list.h:
+                new_list.h = w.height()
+            new_list._add(new_list.n, w)
+            self.remove(i)
+        return new_list
+'''
+        criar nova lista
+        colocar elementos i,n-1 la
+        deletar elementos movidos
+'''
